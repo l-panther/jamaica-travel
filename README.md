@@ -25,7 +25,7 @@ There is no configuration needed to run this website.
 
 Notes
 -----
-This website is an example of my front-end web development capabilities using a template. For more information about the development of this project, read the Development Plan for Jamaica Travel.
+This website is an example of my front-end web development capabilities using a template. 
 
 Credit
 ------

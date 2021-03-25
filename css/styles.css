@@ -185,23 +185,23 @@ h3 {
 	transition-property: transform;}
 
 /* Region 1 */
-#region1 { transform: rotate(-1deg); }
+#region1 { transform: rotate(2deg); }
 
 /* Region 2  */
-#region2 { transform: rotate(1deg); }
+#region2 { transform: rotate(-2deg); }
 /* Region 3 */
-#region3 { transform: rotate(-1deg); }
+#region3 { transform: rotate(2deg); }
 
 /* Region 4 */
-#region4 { transform: rotate(1deg); }
+#region4 { transform: rotate(-2deg); }
 
 /* Region 1 */
-#region1:hover { transform: rotate(1deg); }
+#region1:hover { transform: rotate(0deg); }
 
 /* Region 2  */
 #region2:hover { transform: rotate(0deg); }
 /* Region 3 */
-#region3:hover { transform: rotate(1deg); }
+#region3:hover { transform: rotate(0deg); }
 
 /* Region 4 */
 #region4:hover { transform: rotate(0deg); }
