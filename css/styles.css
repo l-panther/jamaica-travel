@@ -1,3 +1,7 @@
+
+@import url("https://fonts.googleapis.com/css?family=Carter+One:300,4000,500,900");
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script:300,4000,500,900");
+
 /*
 
 Vanilla Template
@@ -12,7 +16,8 @@ section {
 
 body { 
   position: relative; /* we need this for the scrollspy */ 
-  font-size: 16px;
+  font-size: 17px;
+  letter-spacing: normal;
 }
 
 a { color: #3CC; }
@@ -21,7 +26,7 @@ a:hover { color: #FF0; }
 
 h1 { 
 	font-size: 8em; 
-	font-family: 'Gurajada'; }
+	font-family: 'Carter One'; }
 
 h2 { 
 	font-size: 1.4em;
@@ -531,7 +536,7 @@ footer em {
 
 @media (max-width: 767px){
   body { 
-	font-size: 18px;
+	font-size: 16px;
   }
 
   .baner-content {
@@ -796,8 +801,7 @@ body.lb-disable-scrolling {
 }
 
 @media screen and (min-width: 700px) {
-	body { font-size: 18px !important; }
-	
+  
 	#home h1 { font-size: 6em; }
 	
 	h2 { font-size: 1.6em !important; }
@@ -821,8 +825,7 @@ body.lb-disable-scrolling {
 
 
 @media screen and (min-width: 991px) {
-	body { font-size: 20px !important; }
-	
+  
 	.primary-button {
 		font-size: 15px;
 	}
