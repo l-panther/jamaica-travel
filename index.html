@@ -1,179 +1,277 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Jamaica Travel</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="apple-touch-icon" href="img/logo/logo.ico">
-	<link rel="icon" href="img/logo/logo.ico">
+  <!-- Meta -->
+  <meta charset="utf-8"> <!-- Character set -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A website providing information about Jamaica and some of the parishes that make up the island."> <!-- Description -->
+  <meta name="keywords" content="Jamaica, JA, Parishes of Jamaica, Caribbean, Caribbean island, Yard"> <!-- Keywords -->
+  <meta name="author" content="Leroy Russell"> <!-- Author -->
+  <title>Jamaica Travel</title> <!-- Browser tab -->
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/logo/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/logo/apple-touch-icon.png">
 
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/fontAwesome.css">
-	<link rel="stylesheet" href="css/hero-slider.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="css/owl-carousel.css">
+  <!-- Styling -->
+  <link rel="stylesheet" href="assets/css/fontAwesome.css"> <!-- Font Awesome -->
+  <link rel="stylesheet" href="assets/css/styles.css"> <!-- Custom CSS -->
 
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Marck+Script:300,400,600,700,800" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Gurajada:300,400,600,700,800" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
-	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-</head>
-
+</head> 
 <body>
 
-	<div class="fixed-side-navbar">
-		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link" href="#home"><span>Intro</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#regions"><span>Regions</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#map"><span>Map</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#contact"><span>Contact</span></a></li>
-		</ul>
-	</div>
+  <!-- No JavaScript Warning -->
+  <noscript>
+    <div class="no-js w3-medium">
+      <h2>JavaScript is disabled</h2>
+      <p>This website needs JavaScript for essential functionality. To avoid unexpected behavior and potential errors, please enable JavaScript in your browser.</p>
+    </div>
+  </noscript>
 
-	<div class="parallax-content baner-content" id="home">
-		<div class="container">
-			<div class="first-content">
-				<h1>Jamaica </h1>
-				<span><em>Travel</em></span>
-				<div class="primary-button">
-					<a href="#map">View in map</a>
-				</div>
-			</div>
-		</div>
-	</div>
+  <!-- Skiplink -->
+  <a href="#page" title="Skip to the main content" class="skip-link">Skip to main content</a>
+
+  <button class="menu-fab" id="menuFab" type="button" aria-controls="siteDrawer" aria-expanded="false" aria-label="Open menu">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- Drawer -->
+  <div class="drawer" id="siteDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerLabel" aria-hidden="true">
+    <div class="drawer-head">
+      
+      <button class="drawer-close" id="drawerClose" type="button" aria-label="Close menu">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <nav aria-label="Section navigation">
+      <a href="#home" class="drawer-link">Home</a>
+      <a href="#history" class="drawer-link">Our History</a>
+      <a href="#parishList" class="drawer-link">Regions</a>
+      <a href="#map" class="drawer-link">Map</a>
+    </nav>
+    <div class="social-row">
+      <a href="#" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.25-1.5 1.55-1.5H16.7V3.7c-.28-.04-1.25-.12-2.37-.12-2.35 0-3.96 1.43-3.96 4.06V10H7.6v3.1h2.77V21h3.13Z"/></svg></a>
+      <a href="#" aria-label="Twitter"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4.1 4.1 0 0 0-7 3.7A11.7 11.7 0 0 1 3.4 4.6a4.1 4.1 0 0 0 1.3 5.5c-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.6 3.3 4a4.2 4.2 0 0 1-1.8.1 4.1 4.1 0 0 0 3.8 2.9A8.2 8.2 0 0 1 2 18.4a11.6 11.6 0 0 0 6.3 1.8c7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.1Z"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/></svg></a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-content wrap">
+      <p class="hero-eyebrow">Welcome to</p>
+      <h1 class="hero-title">JAMAICA</h1>
+      <a href="#history" class="btn btn-primary">
+        Discover Our Parishes
+      </a>
+    </div>
+  </section>
+
+  <!-- NAvigation -->
+  <nav class="scroll-dots" id="scrollDots" aria-label="Page navigation">
+
+    <button data-target="home" aria-label="Home">
+      <span>Home</span>
+    </button>
+
+    <button data-target="history" aria-label="History">
+      <span>Our history</span>
+    </button>
+
+    <button data-target="parishList" aria-label="ParishList">
+      <span>Parishes</span>
+    </button>
+
+    <button data-target="explore" aria-label="Map">
+      <span>Map</span>
+    </button>
+
+    <button data-target="site-footer" aria-label="Contact">
+      <span>Contact</span>
+    </button>
+
+  </nav>
+
+  <!-- Main -->
+  <main id="main-content" tabindex="-1">
+
+    <section class="history" id="history">
+      <div class="wrap">
+        <div class="history-body">
+          <h2 class="heading"><span class="accent">History</span> of Jamaica</h2>
+          <div class="heading-rule"></div>
+          <div style="margin-top:28px;">
+            <p>Jamaica, the third-largest island in the Caribbean, has a rich and complex history shaped by indigenous cultures, European colonization, African enslavement, and struggles for independence. Before European contact, the island was inhabited by the <b>Ta&iacute;no people</b>, an Arawak-speaking indigenous group who had established organized communities and agricultural practices. They called the island <b>&ldquo;Xaymaca,&rdquo;</b> meaning &ldquo;Land of Wood and Water.&rdquo; The Ta&iacute;no thrived for centuries until the arrival of Christopher Columbus in 1494, which marked the beginning of European influence and a tragic decline in the indigenous population due to disease, forced labor, and conflict.</p>
+            <p>In 1655, the English seized Jamaica from the Spanish, establishing it as a colony within the British Empire. The island&rsquo;s economy soon became heavily reliant on <b>sugar plantations</b>, which depended on the brutal labor of enslaved Africans brought through the transatlantic slave trade. These enslaved populations developed a resilient culture that combined African traditions with elements of European influence, laying the groundwork for Jamaica&rsquo;s unique social and cultural identity. Throughout the 18th and early 19th centuries, the island saw numerous slave uprisings, the most famous being the <b>Maroons&rsquo; resistance</b> in the mountainous regions, where communities of escaped slaves maintained autonomy and fought to preserve their freedom.</p>
+            <p>Slavery in Jamaica was abolished in 1834, leading to significant social and economic changes. The post-emancipation period saw struggles over land, labor, and political representation, but it also fostered a vibrant culture of resilience, expressed through music, religion, and communal life. African, European, and indigenous influences merged in Jamaican <b>cuisine</b>, creating dishes such as jerk chicken, ackee and saltfish, and curried goat, which reflect the island&rsquo;s diverse heritage and resourcefulness. Food became more than sustenance; it was a way of preserving traditions, expressing identity, and celebrating community.</p>
+            <p>Today, the legacy of Jamaica&rsquo;s history is vividly alive in the island&rsquo;s cultural identity. <b>Food and music remain central to everyday life</b>, community gatherings, and national celebrations. Festivals such as <b>Reggae Sumfest</b> and <b>Jamaica Carnival</b> showcase not only musical talent but also the vibrancy of Jamaican culinary traditions, where dishes like jerk chicken, patties, and festival bread are enjoyed alongside the rhythms of reggae and dancehall.</p>
+            <p>Jamaican identity is also closely tied to the concept of resilience and resistance, a trait forged through centuries of colonization, slavery, and social struggle. Music often serves as a voice for social commentary, addressing issues such as inequality, poverty, and human rights, while also promoting unity and national pride. Together, music and cuisine act as living archives, connecting Jamaicans to their past while shaping contemporary expressions of community and creativity.</p>
+            <p>Moreover, the global influence of Jamaican culture is profound. Reggae, dancehall, and even the island&rsquo;s culinary traditions have found audiences worldwide, promoting not only entertainment but also awareness of Jamaica&rsquo;s history, struggles, and values. In essence, modern Jamaican identity is a celebration of survival, innovation, and joy, where every beat of a drum and every plate of food carries the echoes of history and the promise of a resilient, dynamic future.</p>
+          </div>
+        </div>
+
+        <div class="card-stack">
+          <div id="parishList"></div>   
+        </div>
+      </div>
+    </section>
+
+    <!-- Map -->
+    <section class="explore" id="explore">
+      <div class="wrap">
+        <h2 class="heading"><span class="accent">Explore</span> the Island</h2>
+        <div class="heading-rule"></div>
+        <div id="map"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="site-footer">
+    <div class="wrap">
+      <a class="btn btn-primary" href="#home">Back to Top</a>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.25-1.5 1.55-1.5H16.7V3.7c-.28-.04-1.25-.12-2.37-.12-2.35 0-3.96 1.43-3.96 4.06V10H7.6v3.1h2.77V21h3.13Z"/></svg></a>
+        <a href="#" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4.1 4.1 0 0 0-7 3.7A11.7 11.7 0 0 1 3.4 4.6a4.1 4.1 0 0 0 1.3 5.5c-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.6 3.3 4a4.2 4.2 0 0 1-1.8.1 4.1 4.1 0 0 0 3.8 2.9A8.2 8.2 0 0 1 2 18.4a11.6 11.6 0 0 0 6.3 1.8c7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.1Z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3.25a1.96 1.96 0 1 0 0 3.92 1.96 1.96 0 0 0 0-3.92ZM20.44 20h-3.37v-5.9c0-1.4-.03-3.2-1.95-3.2-1.96 0-2.26 1.53-2.26 3.1V20H9.5V8.5h3.24v1.57h.05c.45-.85 1.56-1.75 3.2-1.75 3.42 0 4.05 2.25 4.05 5.17V20Z"/></svg></a>
+        <a href="#" aria-label="Google"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.35 11.1H12v2.9h5.35c-.23 1.4-1.65 4.1-5.35 4.1-3.22 0-5.85-2.67-5.85-5.95S8.78 6.2 12 6.2c1.84 0 3.07.78 3.78 1.46l2.58-2.5C16.9 3.7 14.65 2.7 12 2.7 6.98 2.7 2.9 6.85 2.9 11.9S6.98 21.1 12 21.1c6.93 0 8.55-6.15 7.9-9.15Z"/></svg></a>
+      </div>
+      <p class="copyright">&copy; <span id="currentDate"></span> Jamaica Travel | By <a href="#">Leroy Russell</a></p>
+    </div>
+  </footer>
 
 
-	<!-- Regions -->
-	<div id="regions" class="service-content">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12">
-					<div class="left-text">
-						<h2><span>Regions</span> of Jamaica</h2>
-						<div class="line-dec"></div>
+  <!-- All Javascript Files -->
+ 
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="assets/js/getParish.js"></script>
+ 
+  <!--<script src="js/getRegions.js"></script>-->
+  <script>
+    let year = new Date();
+    document.getElementById("currentDate").innerHTML = year.getFullYear();
 
-						<p>The original inhabitants of Jamaica are believed to be the Arawaks, also called Tainos. They
-							came from South America 2,500 years ago and named the island Xaymaca, which meant ““land of
-							wood and water”. The Arawaks were a mild and simple people by nature. Physically, they were
-							light brown in colour, short and well-shaped with coarse, black hair. Their faces were broad
-							and their noses flat.</p>
+    const hero = document.querySelector(".hero");
+    const heroBackground = document.querySelector(".hero-bg");
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
 
-						<p>They grew cassava, sweet potatoes, maize (corn), fruits, vegetables, cotton and tobacco.
-							Tobacco was grown on a large scale as smoking was their most popular pastime. They built
-							their villages all over the island but most of them settled on the coasts and near rivers as
-							they fished to get food. Fish was also a major part of their diet.</p>
+    let ticking = false;
 
-						<p>The island came under Spanish rule following the arrival of Christopher Columbus in 1494.
-							Many of the indigenous people died of disease, and the Spanish imported African slaves as
-							labourers.</p>
+    function updateHeroParallax() {
+      if (!hero || !heroBackground || reduceMotion.matches) {
+        ticking = false;
+        return;
+      }
 
-						<p>Named Santiago, the island remained a possession of Spain until 1655, when England (later
-							Great Britain) conquered it and renamed it Jamaica. Under British colonial rule Jamaica
-							became a leading sugar exporter, with its plantation economy highly dependent on slaves
-							imported from Africa. </p>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-12">
-					<div class="w3-row regions">
-						<div id="regionList"></div>
-					</div>
-				</div>
+      const heroHeight = hero.offsetHeight;
+      const scrollPosition = window.scrollY;
 
-			</div>
-		</div>
-	</div>
-	<!-- End regions -->
+      if (scrollPosition <= heroHeight) {
+        const movement = scrollPosition * 0.28;
 
+        heroBackground.style.transform =
+          `translate3d(0, ${movement}px, 0)`;
+      }
 
-	<!-- Map -->
-	<div id="map">
+      ticking = false;
+    }
 
-		<div class="container">
-			<h2 class="text-center pb-4"><span>View</span> in map</h2>
-			<div class="row">
-				<div class="col-md-12">
-					<div id="map-container">
-						<!-- How to change your own map point
-							   1. Go to Google Maps
-							   2. Click on your location point
-							   3. Click "Share" and choose "Embed map" tab
-							   4. Copy only URL and paste it within the src="" field below
-						-->
-						<div id="map-canvas"></div>
-						<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1197183.2373802372!2d-1.9415093691103689!3d6.781986417238027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb96f349e85efd%3A0xb8d1e0b88af1f0f5!2sKumasi!5e0!3m2!1sen!2sth!4v1532967884907" width="100%" height="390" frameborder="0" style="border:0" allowfullscreen></iframe> -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End map -->
+    function handleScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeroParallax);
+        ticking = true;
+      }
+    }
 
+    window.addEventListener("scroll", handleScroll, {
+      passive: true
+    });
 
-	<!-- Footer -->
-	<footer id="contact">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="primary-button">
-						<a href="#home">Back To Top</a>
-					</div>
-					<ul class="sociallinks">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-						<li><a href="#"><i class="fa fa-google"></i></a></li>
-					</ul>
-					<p><em>&copy; <span id="currentDate"></span> Jamaica Travel</em> - Created by Leroy Russell</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- End footer -->
+    updateHeroParallax();
 
+  </script> <!-- End script -->
 
-	<!-- All Javascript Files-->
-	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-	<script src="https://maps.googleapis.com/maps/api/js"></script> <!-- Google maps -->
-	<script src="js/vendor/bootstrap.min.js"></script>
-	<script src="js/plugins.js"></script>
-	<script src="js/main.js"></script>
-	<script src="js/getRegions.js"></script>
-	<script src="js/showMap.js"></script>
-	<script>
-		let year = new Date();
-		document.getElementById("currentDate").innerHTML = year.getFullYear();
+  <script>
 
-		$(document).ready(function () {
-			// Add smooth scrolling to all links
-			$(".fixed-side-navbar a, .primary-button a").on('click', function (event) {
+    // ---- scroll-spy dots ----
+    const dotButtons = document.querySelectorAll('#scrollDots button');
+    const sections = Array.from(dotButtons).map((b) => document.getElementById(b.dataset.target));
 
-				// Make sure this.hash has a value before overriding default behavior
-				if (this.hash !== "") {
-					// Prevent default anchor click behavior
-					event.preventDefault();
+    dotButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
 
-					// Store hash
-					var hash = this.hash;
+    function updateDots() {
+      const y = window.scrollY + window.innerHeight / 2;
+      let activeIndex = 0;
+      sections.forEach((sec, i) => {
+        if (sec && sec.offsetTop <= y) activeIndex = i;
+      });
+      dotButtons.forEach((b, i) => b.classList.toggle('is-active', i === activeIndex));
+    }
+    document.addEventListener('scroll', updateDots, { passive: true });
+    updateDots();
+  </script>
 
-					// Using jQuery's animate() method to add smooth page scroll
-					// The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-					$('html, body').animate({
-						scrollTop: $(hash).offset().top
-					}, 800, function () {
+  <script>
+    // ---- floating menu button + left drawer ----
+      const menuFab = document.getElementById('menuFab');
+      const drawer = document.getElementById('siteDrawer');
+      const drawerBackdrop = document.getElementById('drawerBackdrop');
+      const drawerClose = document.getElementById('drawerClose');
 
-						// Add hash (#) to URL when done scrolling (default click behavior)
-						window.location.hash = hash;
-					});
-				} // End if
-			});
-		});
-	</script>
+      function openDrawer() {
+        drawer.classList.add('is-open');
+        drawerBackdrop.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        menuFab.setAttribute('aria-expanded', 'true');
+        drawer.querySelector('.drawer-link')?.focus();
+      }
 
-</body>
+      function closeDrawer() {
+        drawer.classList.remove('is-open');
+        drawerBackdrop.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        menuFab.setAttribute('aria-expanded', 'false');
+        menuFab.focus();
+      }
 
-</html>
+      function handleResize() {
+        if (!drawer) return;
+
+        if (window.innerWidth > 820) {
+          closeDrawer();
+        }
+      }
+
+      // Run on initial page load
+      handleResize();
+
+      // Run whenever window size changes
+      window.addEventListener('resize', handleResize);
+
+      menuFab.addEventListener('click', openDrawer);
+      drawerClose.addEventListener('click', closeDrawer);
+      drawerBackdrop.addEventListener('click', closeDrawer);
+      drawer.querySelectorAll('.drawer-link').forEach((link) => link.addEventListener('click', closeDrawer));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer();
+      });
+  </script>
+</body> <!-- End body -->
+</html> <!-- End html -->
