@@ -32,20 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     card() {
       return `
-        <div class="parish-card" data-parish="${this.id}">
-
-          <div class="parish-card__body">
-            <span class="parish-card__eyebrow">
-              Discover Jamaica
-            </span>
-
+         <article class="parish-card" data-parish="${this.id}">
+          <div class="body">
             <h3>${this.name}</h3>
-
             <p>${this.description1}</p>
             <p>${this.description2}</p>
           </div>
-
-          <div class="parish-card__image">
+    
+          <div class="art">
             <img
               src="assets/images/${this.image}.webp"
               alt="Scenery representing ${this.name}, Jamaica"
@@ -54,17 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
               height="675"
             >
           </div>
-
-          <button
-            class="parish-card__map"
-            type="button"
-            aria-label="Show ${this.name} on the map"
-          >
-            <span>View on map</span>
-            <span aria-hidden="true">↗</span>
-          </button>
-
-        </div>
+        </article>
       `;
     }
 
