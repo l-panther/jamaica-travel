@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     card() {
       return `
-        <article class="parish-card" data-parish="${this.id}">
+        <div class="parish-card" data-parish="${this.id}">
 
           <div class="parish-card__body">
             <span class="parish-card__eyebrow">
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <span aria-hidden="true">↗</span>
           </button>
 
-        </article>
+        </div>
       `;
     }
 
