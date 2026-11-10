@@ -1,23 +1,25 @@
-// Global variable for the Leaflet map
+
 let map;
 
-// Run code after the HTML document has fully loaded
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Create the map and set initial view
-  // Coordinates point to Jamaica
-  map = L.map("map").setView([18.1096, -77.2975], 9);
+  const list = document.getElementById("parishList");
+  const mapElement = document.getElementById("map");
 
-  // Add OpenStreetMap tiles to the map
+  if (!list || !mapElement || typeof L === "undefined") return;
+
+  // Initialise Jamaica map
+  map = L.map("map", {
+    scrollWheelZoom: false
+  }).setView([18.1096, -77.2975], 9);
+
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "© OpenStreetMap"
+    attribution: "© OpenStreetMap contributors",
+    maxZoom: 19
   }).addTo(map);
 
-  // Parish class
-  // Used to create parish objects with cards and map markers
   class Parish {
 
-    // Constructor method
     constructor(id, name, image, description1, description2, location) {
       this.id = id;
       this.name = name;
@@ -25,52 +27,67 @@ document.addEventListener("DOMContentLoaded", () => {
       this.description1 = description1;
       this.description2 = description2;
       this.location = location;
+      this.leafletMarker = null;
     }
 
-    // Create parish card HTML
     card() {
       return `
-       <div class="parish-card">
-        <div class="body">
+        <article class="parish-card" data-parish="${this.id}">
+
+          <div class="parish-card__body">
+            <span class="parish-card__eyebrow">
+              Discover Jamaica
+            </span>
+
             <h3>${this.name}</h3>
+
             <p>${this.description1}</p>
             <p>${this.description2}</p>
-        </div>
-        <div class="art">
-          <!-- Parish image -->
-          <img src="assets/images/${this.image}.webp" alt="Image of ${this.name} parish">
-        </div>
-      </div>`;
+          </div>
+
+          <div class="parish-card__image">
+            <img
+              src="assets/images/${this.image}.webp"
+              alt="Scenery representing ${this.name}, Jamaica"
+              loading="lazy"
+              width="1200"
+              height="675"
+            >
+          </div>
+
+          <button
+            class="parish-card__map"
+            type="button"
+            aria-label="Show ${this.name} on the map"
+          >
+            <span>View on map</span>
+            <span aria-hidden="true">↗</span>
+          </button>
+
+        </article>
+      `;
     }
 
-    // Create marker on the map
     marker(map) {
-
-      // Save marker reference so we can control it later
       this.leafletMarker = L.marker(
         [this.location.lat, this.location.lng],
         { riseOnHover: true }
       )
-
-      // Add marker to map
-      .addTo(map)
-
-      // Add popup to marker
-      .bindPopup(`<h4><b>${this.name}</b></h4>`);
+        .addTo(map)
+        .bindPopup(`<strong>${this.name}</strong>`);
     }
   }
 
-  // Array containing all parish objects
   const parishes = [
 
-    // Kingston
+    // Westmoreland
     new Parish(
       1,
-      "Kingston",
-      "kingston",
-      "Kingston is the capital and largest city of Jamaica, located on the southeastern coast of the island.",
-      "It faces a natural harbour protected by the Palisadoes, a long sand spit which connects the town of Port Royal and the Norman Manley International Airport to the rest of the island.",
-      { lat: 18.017874, lng: -76.809906 }
+      "Westmoreland",
+      "westmoreland",
+      "Westmoreland is located at the western end of Jamaica, in the county of Cornwall. Its capital is Savanna-la-Mar.",
+      "The parish is known for Negril's beautiful beaches, dramatic limestone cliffs and spectacular Caribbean sunsets.",
+      { lat: 18.2700, lng: -78.1500 }
     ),
 
     // Saint Mary
@@ -78,19 +95,19 @@ document.addEventListener("DOMContentLoaded", () => {
       2,
       "Saint Mary",
       "st-mary",
-      "Saint Mary is a parish located in the northeast section of Jamaica. With a population of 114,227 it is one of Jamaica's smallest parishes, located in the county of Middlesex.",
-      "Its chief town and capital is Port Maria, located on the coast. It is also the birthplace of established dancehall reggae artists.",
+      "Saint Mary is a scenic parish on Jamaica's northeastern coast, in the county of Middlesex. Its capital is Port Maria.",
+      "Known for lush hills, peaceful beaches and the coastal community of Oracabessa, it offers a quieter side of Jamaica.",
       { lat: 18.375110, lng: -76.893270 }
     ),
 
-    // Portmore
+    // Saint Catherine
     new Parish(
       3,
-      "Portmore",
-      "portmore",
-      "Portmore is a large coastal city in southern Jamaica in Saint Catherine, and a dormitory town for the neighbouring cities of Kingston and Spanish Town.",
-      "Much of the land is reclaimed swamp. Port Henderson Hill, formerly known as Salt Pond Hill, is visible from neighbouring parishes.",
-      { lat: 17.973789, lng: -76.868698 }
+      "Saint Catherine",
+      "st-catherine",
+      "Saint Catherine is a parish in southeastern Jamaica, in the county of Middlesex. Its capital, Spanish Town, was once Jamaica's capital.",
+      "The parish includes Portmore, historic Spanish Town, Hellshire Beach and the scenic Rio Cobre area.",
+      { lat: 18.0400, lng: -77.0200 }
     ),
 
     // Saint Ann
@@ -98,40 +115,67 @@ document.addEventListener("DOMContentLoaded", () => {
       4,
       "Saint Ann",
       "st-ann",
-      "Saint Ann is the largest parish in Jamaica. It is situated on the north coast of the island, in the county of Middlesex.",
-      "Saint Ann is the birthplace of reggae singers such as Bob Marley and many others.",
+      "Saint Ann is Jamaica's largest parish by area, located on the northern coast in the county of Middlesex. Its capital is Saint Ann's Bay.",
+      "Often called the Garden Parish, it is home to Ocho Rios, Dunn's River Falls and Nine Mile, the birthplace of Bob Marley.",
       { lat: 18.434610, lng: -77.200050 }
     )
+
   ];
 
-  // Get container where cards will be displayed
-  const list = document.getElementById("parishList");
+  // Render cards
+  list.innerHTML = parishes.map(parish => parish.card()).join("");
 
-  // Clear existing content
-  list.innerHTML = "";
+  // Add map markers
+  parishes.forEach(parish => parish.marker(map));
 
-  // Loop through each parish
-  parishes.forEach(p => {
+  // Fit map to the four locations
+  const bounds = L.latLngBounds(
+    parishes.map(parish => [
+      parish.location.lat,
+      parish.location.lng
+    ])
+  );
 
-    // Add parish card to page
-    list.innerHTML += p.card();
-
-    // Add marker to map
-    p.marker(map);
+  map.fitBounds(bounds, {
+    padding: [40, 40],
+    maxZoom: 9
   });
 
-  // Add hover events to each parish card
-  document.querySelectorAll(".region").forEach((card, i) => {
+  // Connect cards to map markers
+  document.querySelectorAll(".parish-card").forEach(card => {
 
-    // Open popup when mouse enters card
-    card.addEventListener("mouseenter", () =>
-      parishes[i].leafletMarker.openPopup()
-    );
+    const id = Number(card.dataset.parish);
+    const parish = parishes.find(p => p.id === id);
 
-    // Close popup when mouse leaves card
-    card.addEventListener("mouseleave", () =>
-      parishes[i].leafletMarker.closePopup()
-    );
+    if (!parish) return;
+
+    card.addEventListener("mouseenter", () => {
+      parish.leafletMarker.openPopup();
+    });
+
+    card.addEventListener("mouseleave", () => {
+      parish.leafletMarker.closePopup();
+    });
+
+    const mapButton = card.querySelector(".parish-card__map");
+
+    mapButton.addEventListener("click", () => {
+
+      map.setView(
+        [parish.location.lat, parish.location.lng],
+        11,
+        { animate: true }
+      );
+
+      parish.leafletMarker.openPopup();
+
+      mapElement.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+    });
+
   });
 
 });
