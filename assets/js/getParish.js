@@ -20,23 +20,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   class Parish {
 
-    constructor(id, name, image, description1, description2, location) {
-      this.id = id;
-      this.name = name;
-      this.image = image;
-      this.description1 = description1;
-      this.description2 = description2;
-      this.location = location;
-      this.leafletMarker = null;
-    }
+   
+constructor(id, name, subtitle, image, description1, description2, location) {
+  this.id = id;
+  this.name = name;
+  this.subtitle = subtitle;
+  this.image = image;
+  this.description1 = description1;
+  this.description2 = description2;
+  this.location = location;
+  this.leafletMarker = null;
+}
 
-   card() {
+card() {
   return `
-    <div class="parish-card">
+    <article class="parish-card" data-parish="${this.id}">
+
       <div class="body">
         <h3>${this.name}</h3>
-        <p>${this.description1}</p>
-        <p>${this.description2}</p>
+
+        <p class="parish-location">
+          <span aria-hidden="true">⌖</span>
+          ${this.subtitle}
+        </p>
+
+        <div class="parish-description">
+          <p>${this.description1}</p>
+          <p>${this.description2}</p>
+        </div>
       </div>
 
       <div class="art">
@@ -46,9 +57,20 @@ document.addEventListener("DOMContentLoaded", () => {
           loading="lazy"
         >
       </div>
-    </div>
+
+      <button
+        type="button"
+        class="parish-map-btn"
+        data-parish="${this.id}"
+      >
+        <span>View on map</span>
+        <span aria-hidden="true">↗</span>
+      </button>
+
+    </article>
   `;
 }
+
 
     marker(map) {
       this.leafletMarker = L.marker(
