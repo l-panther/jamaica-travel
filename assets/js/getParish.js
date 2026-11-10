@@ -125,11 +125,43 @@ card() {
 ];
 
 
+
   // Render cards
   list.innerHTML = parishes.map(parish => parish.card()).join("");
 
   // Add map markers
   parishes.forEach(parish => parish.marker(map));
+
+  // View on map buttons
+  document.querySelectorAll(".parish-map-btn").forEach(button => {
+    button.addEventListener("click", () => {
+
+      const parishId = Number(button.dataset.parish);
+      const parish = parishes.find(p => p.id === parishId);
+
+      if (!parish || !parish.leafletMarker) return;
+
+      // Scroll to map
+      document.getElementById("map").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+      // Zoom to parish
+      map.flyTo(
+        [parish.location.lat, parish.location.lng],
+        11,
+        { duration: 1.2 }
+      );
+
+      // Open marker popup after zoom
+      map.once("moveend", () => {
+        parish.leafletMarker.openPopup();
+      });
+
+    });
+  });
+
 
   // Fit map to the four locations
   const bounds = L.latLngBounds(
