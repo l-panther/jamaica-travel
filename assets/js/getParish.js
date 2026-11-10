@@ -83,48 +83,47 @@ card() {
   }
 
   const parishes = [
+  new Parish(
+    1,
+    "Westmoreland",
+    "Western Jamaica · Savanna-la-Mar",
+    "westmoreland",
+    "Westmoreland is located in western Jamaica, in the county of Cornwall. Its capital is Savanna-la-Mar, and the parish is known for its beautiful coastline, agricultural communities and relaxed atmosphere.",
+    "The parish is home to Negril, famous for its Seven Mile Beach, limestone cliffs and spectacular sunsets. Westmoreland also has a rich cultural heritage and a strong connection to Jamaica's tourism and agricultural industries.",
+    { lat: 18.2700, lng: -78.1500 }
+  ),
 
-    // Westmoreland
-    new Parish(
-      1,
-      "Westmoreland",
-      "westmoreland",
-      "Westmoreland is located at the western end of Jamaica, in the county of Cornwall. Its capital is Savanna-la-Mar.",
-      "The parish is known for Negril's beautiful beaches, dramatic limestone cliffs and spectacular Caribbean sunsets.",
-      { lat: 18.2700, lng: -78.1500 }
-    ),
+  new Parish(
+    2,
+    "Saint Mary",
+    "Northeastern Jamaica · Port Maria",
+    "st-mary",
+    "Saint Mary is a parish located in the northeast section of Jamaica. With a population of 114,227 it is one of Jamaica's smaller parishes, located in the county of Middlesex.",
+    "Its chief town and capital is Port Maria, located on the coast. The parish is known for its lush landscapes, rivers, beaches and connections to Jamaican music and culture.",
+    { lat: 18.375110, lng: -76.893270 }
+  ),
 
-    // Saint Mary
-    new Parish(
-      2,
-      "Saint Mary",
-      "st-mary",
-      "Saint Mary is a scenic parish on Jamaica's northeastern coast, in the county of Middlesex. Its capital is Port Maria.",
-      "Known for lush hills, peaceful beaches and the coastal community of Oracabessa, it offers a quieter side of Jamaica.",
-      { lat: 18.375110, lng: -76.893270 }
-    ),
+  new Parish(
+    3,
+    "Saint Catherine",
+    "Southeastern Jamaica · Spanish Town",
+    "st-catherine",
+    "Saint Catherine is one of Jamaica's most populous parishes, located in the southeastern part of the island. Its capital, Spanish Town, served as Jamaica's capital before Kingston.",
+    "The parish includes Portmore, Hellshire Beach and the Rio Cobre. It combines historic landmarks, expanding urban communities, agricultural areas and important commercial centres.",
+    { lat: 18.0400, lng: -77.0200 }
+  ),
 
-    // Saint Catherine
-    new Parish(
-      3,
-      "Saint Catherine",
-      "st-catherine",
-      "Saint Catherine is a parish in southeastern Jamaica, in the county of Middlesex. Its capital, Spanish Town, was once Jamaica's capital.",
-      "The parish includes Portmore, historic Spanish Town, Hellshire Beach and the scenic Rio Cobre area.",
-      { lat: 18.0400, lng: -77.0200 }
-    ),
+  new Parish(
+    4,
+    "Saint Ann",
+    "Northern Jamaica · Saint Ann's Bay",
+    "st-ann",
+    "Saint Ann is Jamaica's largest parish by area, situated on the northern coast in the county of Middlesex. It is known for its beautiful beaches, green hills and popular tourist attractions.",
+    "The parish includes Ocho Rios and attractions such as Dunn's River Falls. Saint Ann is also the birthplace of reggae legend Bob Marley and an important part of Jamaica's cultural heritage.",
+    { lat: 18.434610, lng: -77.200050 }
+  )
+];
 
-    // Saint Ann
-    new Parish(
-      4,
-      "Saint Ann",
-      "st-ann",
-      "Saint Ann is Jamaica's largest parish by area, located on the northern coast in the county of Middlesex. Its capital is Saint Ann's Bay.",
-      "Often called the Garden Parish, it is home to Ocho Rios, Dunn's River Falls and Nine Mile, the birthplace of Bob Marley.",
-      { lat: 18.434610, lng: -77.200050 }
-    )
-
-  ];
 
   // Render cards
   list.innerHTML = parishes.map(parish => parish.card()).join("");
