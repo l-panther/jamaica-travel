@@ -30,27 +30,25 @@ document.addEventListener("DOMContentLoaded", () => {
       this.leafletMarker = null;
     }
 
-    card() {
-      return `
-         <div class="parish-card" data-parish="${this.id}">
-          <div class="body">
-            <h3>${this.name}</h3>
-            <p>${this.description1}</p>
-            <p>${this.description2}</p>
-          </div>
-    
-          <div class="art">
-            <img
-              src="assets/images/${this.image}.webp"
-              alt="Scenery representing ${this.name}, Jamaica"
-              loading="lazy"
-              width="1200"
-              height="675"
-            >
-          </div>
-        </div>
-      `;
-    }
+   card() {
+  return `
+    <div class="parish-card">
+      <div class="body">
+        <h3>${this.name}</h3>
+        <p>${this.description1}</p>
+        <p>${this.description2}</p>
+      </div>
+
+      <div class="art">
+        <img
+          src="assets/images/${this.image}.webp"
+          alt="Scenery representing ${this.name}, Jamaica"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  `;
+}
 
     marker(map) {
       this.leafletMarker = L.marker(
