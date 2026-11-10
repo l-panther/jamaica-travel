@@ -192,30 +192,60 @@ card() {
       parish.leafletMarker.closePopup();
     });
 
-    const mapButton = card.querySelector(".parish-card__map");
-
-    mapButton.addEventListener("click", () => {
-
-      map.setView(
-        [parish.location.lat, parish.location.lng],
-        11,
-        { animate: true }
-      );
-
-      parish.leafletMarker.openPopup();
-
-      mapElement.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
-
-    });
-
   });
 
     
   /* ==========================================
      RESET MAP - SHOW ALL JAMAICA
+  ========================================== */
+ 
+/* ==========================================
+   RENDER CARDS AND MARKERS
+========================================== */
+
+// Render cards
+list.innerHTML = parishes.map(parish => parish.card()).join("");
+
+// Add map markers
+parishes.forEach(parish => parish.marker(map));
+
+
+/* ==========================================
+   VIEW PARISH ON MAP
+========================================== */
+
+document.querySelectorAll(".parish-map-btn").forEach(button => {
+  button.addEventListener("click", () => {
+
+    const parishId = Number(button.dataset.parish);
+    const parish = parishes.find(p => p.id === parishId);
+
+    if (!parish || !parish.leafletMarker) return;
+
+    // Scroll to the map
+    document.getElementById("map").scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+    // Zoom to selected parish
+    map.flyTo(
+      [parish.location.lat, parish.location.lng],
+      11,
+      { duration: 1.2 }
+    );
+
+    // Open the selected marker popup
+    map.once("moveend", () => {
+      parish.leafletMarker.openPopup();
+    });
+
+  });
+});
+
+
+  /* ==========================================
+     SHOW ALL JAMAICA
   ========================================== */
   
   const resetButton = document.getElementById("resetJamaicaMap");
@@ -223,10 +253,10 @@ card() {
   if (resetButton) {
     resetButton.addEventListener("click", () => {
   
-      // Close any open parish popup
+      // Close any open popup
       map.closePopup();
   
-      // Return to the full Jamaica view
+      // Return to full Jamaica view
       map.flyTo(
         [18.1096, -77.2975],
         9,
@@ -235,6 +265,7 @@ card() {
   
     });
   }
+
 
 
 });
