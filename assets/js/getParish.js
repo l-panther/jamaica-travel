@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     card() {
       return `
-         <article class="parish-card" data-parish="${this.id}">
+         <div class="parish-card" data-parish="${this.id}">
           <div class="body">
             <h3>${this.name}</h3>
             <p>${this.description1}</p>
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
               height="675"
             >
           </div>
-        </article>
+        </div>
       `;
     }
 
