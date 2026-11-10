@@ -213,4 +213,28 @@ card() {
 
   });
 
+    
+  /* ==========================================
+     RESET MAP - SHOW ALL JAMAICA
+  ========================================== */
+  
+  const resetButton = document.getElementById("resetJamaicaMap");
+  
+  if (resetButton) {
+    resetButton.addEventListener("click", () => {
+  
+      // Close any open parish popup
+      map.closePopup();
+  
+      // Return to the full Jamaica view
+      map.flyTo(
+        [18.1096, -77.2975],
+        9,
+        { duration: 1.2 }
+      );
+  
+    });
+  }
+
+
 });
