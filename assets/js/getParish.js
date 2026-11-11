@@ -250,22 +250,33 @@ document.querySelectorAll(".parish-map-btn").forEach(button => {
   
   const resetButton = document.getElementById("resetJamaicaMap");
   
-  if (resetButton) {
+   if (resetButton) {
     resetButton.addEventListener("click", () => {
-  
+
       // Close any open popup
       map.closePopup();
-  
+
+      // Responsive zoom levels
+      const width = window.innerWidth;
+
+      let zoom;
+
+      if (width <= 767) {
+        zoom = 7.8; // Phone
+      } else if (width <= 1024) {
+        zoom = 9;   // Tablet
+      } else {
+        zoom = 9;   // Desktop
+      }
+
       // Return to full Jamaica view
       map.flyTo(
         [18.1096, -77.2975],
-        9,
+        zoom,
         { duration: 1.2 }
       );
-  
+
     });
   }
-
-
 
 });
