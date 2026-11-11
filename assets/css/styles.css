@@ -140,7 +140,7 @@
   inset: -12% 0;
   z-index: -2;
 
-  background-image: url("/assets/images/hero.webp");
+  background-image: url("../images/hero.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
