@@ -374,8 +374,8 @@
 
 .history .wrap {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 64px;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 4fr);
+  gap: 48px;
   align-items: start;
 }
 
@@ -632,7 +632,7 @@
    RESPONSIVE - TABLET
 ========================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
 
   .history .wrap {
     grid-template-columns: 1fr;
@@ -735,7 +735,3 @@
   .footer-social a:hover{ background:var(--green); border-color:var(--green); color:var(--paper); }
   .copyright{ color:rgba(255,255,255,.5); font-size:13px; }
   .copyright a{ color:var(--yellow); text-decoration:none; }
-
-  @media (max-width:900px){
-    .history .wrap{ grid-template-columns:1fr; }
-  }
