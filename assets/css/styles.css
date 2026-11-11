@@ -21,7 +21,7 @@
   body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.7;}
   img,svg{max-width:100%;display:block;}
   a{color:inherit;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .wrap{max-width:1380px;margin:0 auto;padding:0 32px;}
   h1,h2,h3{font-family:var(--font-head);margin:0 0 .5em;color:var(--ink);}
   p{margin:0 0 1.1em;color:var(--ink-soft);}
   p:last-child{margin-bottom:0;}
