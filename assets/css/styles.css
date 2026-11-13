@@ -733,5 +733,7 @@
     display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.75);
   }
   .footer-social a:hover{ background:var(--green); border-color:var(--green); color:var(--paper); }
-  .copyright{ color:rgba(255,255,255,.5); font-size:13px; }
-  .copyright a{ color:var(--yellow); text-decoration:none; }
+  .copyright{ color:rgba(255,255,255,.5); font-size:13px; margin: 0;}
+  .credit { font-size: 11px; }
+  .credit span{ color:var(--yellow); }
+
